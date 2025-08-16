@@ -1,0 +1,9 @@
+# Node and Python artifacts
+node_modules/
+**/__pycache__/
+**/.vite/
+**/dist/
+app.zip
+
+# Project artifacts
+storm-backend/database/app.db

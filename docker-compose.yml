@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./storm-backend
+      dockerfile: Dockerfile
+    container_name: storm-backend
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./storm-backend/src:/app/src
+    environment:
+      - FLASK_DEBUG=1
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: storm-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./storm-clone:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_BASE_URL=http://backend:5000
+
